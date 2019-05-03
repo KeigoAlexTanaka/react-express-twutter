@@ -1,3 +1,4 @@
 # Dependencies
 node_modules/
 *.swp
+client/node_modules/
