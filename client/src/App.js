@@ -7,6 +7,12 @@ import './App.css';
 function App() {
   // using useState with hooks
   const [tweets, setTweets] = useState([]);
+  const [form, setForm] = useState({
+    content: null,
+    user: null,
+    retweets: null
+  });
+  const [done, setDone] = useState(false);
   // using hooks
   useEffect(() => { // you can't put an async function in a hook
     const fetchData = async () => {
@@ -15,12 +21,24 @@ function App() {
       if (tweetData.data) setTweets(tweetData.data);
     }
     fetchData();
-  }, []);
+
+    const postData = async () => {
+      await axios.post('http://localhost:3001/tweets', form);
+      setForm({ content: null, user: null, retweets: null });
+    }
+    console.log(done);
+    if (done) postData();
+  }, [form, done]);
 
   return (
     <div className="App">
       <h1>Twutter</h1>
-      <Form />
+      <Form
+        form={form}
+        done={done}
+        setForm={setForm}
+        setDone={setDone}
+      />
       { tweets.map((tweet, key) => {
           return (
             <Post 
