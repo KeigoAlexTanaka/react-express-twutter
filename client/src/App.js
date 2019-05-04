@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Form from './components/Form/Form';
 import Post from './components/Post/Post';
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
   return (
     <div className="App">
       <h1>Twutter</h1>
+      <Form />
       { tweets.map((tweet, key) => {
           return (
             <Post 
