@@ -4,6 +4,7 @@ import Post from './components/Post/Post';
 import './App.css';
 
 function App() {
+  // using useState with hooks
   const [tweets, setTweets] = useState([]);
   // using hooks
   useEffect(() => { // you can't put an async function in a hook
@@ -17,8 +18,17 @@ function App() {
 
   return (
     <div className="App">
-      { tweets.map((tweet, key) => (<Post key={key} tweet={tweet}/>)) }
-    </div>
+      <h1>Twutter</h1>
+      { tweets.map((tweet, key) => {
+          return (
+            <Post 
+              key={key}
+              tweet={tweet}
+            />
+          )
+        })
+      }
+     </div>
   );
 }
 
