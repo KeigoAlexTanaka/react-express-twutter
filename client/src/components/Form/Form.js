@@ -2,20 +2,20 @@ import React from 'react';
 
 const Form = props => {
   return (
-    <form onSubmit={() => props.setDone(true)}>
+    <form onSubmit={e => props.postTweet(e)}>
       <label htmlFor="content">Content: </label>
-      <input onChange={e => props.setForm({...props.form, [e.target.name]: e.target.value})}
+      <input onChange={e => props.handleChange(e)}
         type="text"
         name="content"/>
       <label htmlFor="user">User: </label>
-      <input onChange={e => props.setForm({...props.form, [e.target.name]: e.target.value})}
+      <input onChange={e => props.handleChange(e)}
         type="text"
         name="user"/>
       <label htmlFor="retweets">Retweets: </label>
-      <input onChange={e => props.setForm({...props.form, [e.target.name]: e.target.value})}
+      <input onChange={e => props.handleChange(e)}
         type="number"
         name="retweets"/>
-      <button type="submit" onClick={e => e.preventDefault()}>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   )
 }
