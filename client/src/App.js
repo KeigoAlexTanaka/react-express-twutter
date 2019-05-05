@@ -25,9 +25,17 @@ class App extends React.Component {
         'form': {
           ...state.form, [name]: value
         }
-    }))
+    }));
   }
 
+  // won't work until you set up your GET route
+  getTweets = async () => {
+    const tweetData = await axios.get('http://localhost:3001/tweets');
+    const tweets = tweetData.data;
+    this.setState({tweets});
+  }
+
+  // won't work until you set up your POST route
   postTweet = async e => {
     e.preventDefault();
     let { form } = this.state;
@@ -35,10 +43,11 @@ class App extends React.Component {
     await this.getTweets();
   }
 
-  getTweets = async () => {
-    const tweetData = await axios.get('http://localhost:3001/tweets');
-    const tweets = tweetData.data;
-    this.setState({tweets});
+  // won't work until you set up your DELETE route
+  deleteTweet = async (e, id) => {
+    e.preventDefault();
+    await axios.delete(`http://localhost:3001/tweets/${id}`);
+    await this.getTweets();
   }
 
   componentDidMount = () => {
@@ -55,10 +64,9 @@ class App extends React.Component {
           handleChange={this.handleChange}
           postTweet={this.postTweet}
         />
-        { tweets.map((tweet, key) => {
-            return <Post key={key} tweet={tweet}/>
-        })
-        }
+        { tweets.length ? tweets.map((tweet, key) => {
+            return <Post key={key} tweet={tweet} handleDelete={this.deleteTweet} />
+        }) : <h1>Fetch some tweets!</h1> }
        </div>
     );
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import './Post.css';
 
 const Post = props => {
-  let { content, user, retweets } = props.tweet;
+  let { content, user, retweets, id } = props.tweet;
   return (
     <div className="Post">
       <p>{content}</p>
@@ -10,6 +10,7 @@ const Post = props => {
       <h4>{retweets} 
         <i className="fas fa-retweet"></i>
       </h4>
+      <button onClick={e => props.handleDelete(e, id)}>DELETE</button>
     </div>
   )
 };
